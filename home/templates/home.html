@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="POST" action="/">
+    {% csrf_token %}
+    <div class="m-3">
+        <label for="exampleFormControlInput1" class="form-label">Pincode</label>
+        <input name="pincode" type="name" class="form-control" id="exampleFormControlInput1" placeholder="Pincode">
+    </div>
+
+    <div class="col-auto text-center">
+        <button type="submit" class="btn btn-primary mb-3">Find Slots</button>
+    </div>
+
+</form>
+<div class="container">
+    
+    <div class="row">
+        {% for item in center_list %}
+
+        <div class="col-lg-3 p-3" style="min-height: 400px !important;">
+            <div class="col-md-12 shadow border rounded">
+                <div class="card-body">
+                    <h4>{{ item.name }}</h4>
+                    <p class="card-text">{{ item.address }}</p>
+                    <p class="card-text">{{ item.state_name }} - {{ item.district_name }} </p>
+                    <p class="card-text">Minimum AgeLimit:-{{ item.min_age_limit }}</p>
+                    <p class="card-text">Vaccine:-{{ item.vaccine }}</p>
+                    <p class="card-text">Eee Type:-{{ item.fee_type }} | INR{{ item.fee }}</p>
+                    <p class="card-text">Slots Available:- {{ item.available_capacity }}</p>
+
+                    <p class="card-text"><small class="text-muted">Last updated 8 seconds ago</small></p>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
